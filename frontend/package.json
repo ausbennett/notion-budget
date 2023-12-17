@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "vue": "^2.7.15"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.6"
+  }
+}
