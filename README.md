@@ -5,5 +5,5 @@ A simple web app that will integrate with notion API, to allow me to switftly tr
 
 # TO-DOs:
 - [] Build Frontend with Vue
-- [] Build Backend with Express
-- [] Add a diagram to show purchases
+- [] Build Backend with Python (Flask)
+
