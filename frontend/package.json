@@ -1,8 +1,33 @@
 {
+  "name": "vue",
+  "description": "Include Bootstrap's source Sass and individual JavaScript plugins with Vue and Vite.",
+  "version": "0.0.0",
+  "private": true,
+  "repository": "twbs/examples",
+  "license": "MIT",
+  "stackblitz": {
+    "startCommand": "npm start"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --ignore-path .gitignore",
+    "fix": "npm run lint -- --fix",
+    "test": "npm run build && npm run lint"
+  },
   "dependencies": {
-    "vue": "^2.7.15"
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2",
+    "vue": "^3.3.9"
   },
   "devDependencies": {
-    "tailwindcss": "^3.3.6"
+    "@vitejs/plugin-vue": "^4.5.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "vite": "^5.0.4",
+    "vue-loader": "^17.3.1"
   }
 }
