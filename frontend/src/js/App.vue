@@ -5,37 +5,42 @@
  -->
 
 <template>
-
-  <div class="container bg-warning p-2  m-5">
-
-
-    <div class="row p-3 m-3">
-      <div class="col">
-        <div class="form-floating">
-        <input type="text" class="form-control" placeholder="title" v-model="title">
-        <label for="floatingInput">Title</label>
-      </div>
-      </div>
-    </div>
-    
-    <div class="row p-3 m-3">
-      <div class="col btn-group">
-        <button class="btn btn-primary" @click="setType(name)" v-for="(name, index) in types" :key="index">
-          {{ name }}
-        </button>
-      </div>
-    </div>
-
-    <div class="row p-3 m-3">
-      <div class="input-group">
-        <span class="input-group-text">$</span>
-        <input type="number" v-model="price" class="form-control" aria-label="Amount (to the nearest dollar)">
-        <button type="button" class="btn btn-success" @click="printData">print data object</button>
-      </div>
-    </div>
-
-</div>
   
+  <div class="grid-container">
+    <h1>expense tracker.</h1>
+    <div class="containter custom-container p-2 mx-auto">
+      <div class="row px-3 pb-1 m-3">
+        <div class="col">
+          <div class="form-floating">
+          <input type="text" class="form-control" placeholder="title" v-model="title">
+          <label for="floatingInput">entry title</label>
+        </div>
+        </div>
+      </div>
+      
+      <div class="row px-3 pb-3 m-3">
+    <div class="col btn-group">
+      <button
+        class="btn"
+        :class="{ 'btn-primary': dataObject.type === name, 'btn-outline-primary': dataObject.type !== name }"
+        @click="setType(name)"
+        v-for="(name, index) in types"
+        :key="index"
+      >
+        {{ name }}
+      </button>
+    </div>
+  </div>
+
+      <div class="row pt-5 px-3 m-3">
+        <div class="input-group fs-2">
+          <span class="input-group-text">$</span>
+          <input type="number" v-model="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+          <button type="button" class="btn btn-success" @click="printData">submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -45,7 +50,7 @@ export default {
     return {
       title: '',
       price: 5,
-      types: ['Groceries', 'Personal', 'Education', 'Misc'],
+      types: ['food', 'personal', 'school', 'misc'],
       dataObject:{
         title: 'n/a',
         price: -1,
