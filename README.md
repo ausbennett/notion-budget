@@ -1,4 +1,5 @@
 
+<img width="377" alt="image" src="https://github.com/ausbennett/notion-budget/assets/61357467/858d92ed-25ae-4beb-9aa6-b416065241eb">
 
 # Goal:
 
