@@ -13,6 +13,6 @@ class Entry(BaseModel):
 app = FastAPI()
 
 
-@app.post("/")
-async def create_entry(entry: Entry):
-    return entry
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
