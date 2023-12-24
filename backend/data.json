@@ -1,0 +1,105 @@
+{
+    "object": "database",
+    "id": "cb21695d-6a5b-4662-b7c8-6d5ccad628a8",
+    "cover": null,
+    "icon": {
+        "type": "external",
+        "external": {
+            "url": "https://www.notion.so/icons/cash_gray.svg"
+        }
+    },
+    "created_time": "2023-12-18T01:37:00.000Z",
+    "created_by": {
+        "object": "user",
+        "id": "39935654-5899-4a8e-8261-3eecf959c55d"
+    },
+    "last_edited_by": {
+        "object": "user",
+        "id": "39935654-5899-4a8e-8261-3eecf959c55d"
+    },
+    "last_edited_time": "2023-12-24T03:10:00.000Z",
+    "title": [
+        {
+            "type": "text",
+            "text": {
+                "content": "expense tracker",
+                "link": null
+            },
+            "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+            },
+            "plain_text": "expense tracker",
+            "href": null
+        }
+    ],
+    "description": [],
+    "is_inline": false,
+    "properties": {
+        "amount": {
+            "id": "hZT%3C",
+            "name": "amount",
+            "type": "number",
+            "number": {
+                "format": "canadian_dollar"
+            }
+        },
+        "type": {
+            "id": "jNWc",
+            "name": "type",
+            "type": "select",
+            "select": {
+                "options": [
+                    {
+                        "id": "dfd1f908-61ba-4f4e-a068-c334b2886920",
+                        "name": "food",
+                        "color": "green",
+                        "description": null
+                    },
+                    {
+                        "id": "283adcb9-446a-43a2-8fd3-c95582e3af87",
+                        "name": "personal",
+                        "color": "blue",
+                        "description": null
+                    },
+                    {
+                        "id": "ae276d1b-d4ae-4eab-a69e-07a8f3a87eb3",
+                        "name": "school",
+                        "color": "red",
+                        "description": null
+                    },
+                    {
+                        "id": "35664951-85e8-4a71-b7ac-806677193065",
+                        "name": "misc",
+                        "color": "default",
+                        "description": null
+                    }
+                ]
+            }
+        },
+        "date": {
+            "id": "t%5CuU",
+            "name": "date",
+            "type": "date",
+            "date": {}
+        },
+        "description": {
+            "id": "title",
+            "name": "description",
+            "type": "title",
+            "title": {}
+        }
+    },
+    "parent": {
+        "type": "workspace",
+        "workspace": true
+    },
+    "url": "https://www.notion.so/cb21695d6a5b4662b7c86d5ccad628a8",
+    "public_url": null,
+    "archived": false,
+    "request_id": "39788ca4-d21a-440c-adb5-20f8f3a15e9f"
+}
