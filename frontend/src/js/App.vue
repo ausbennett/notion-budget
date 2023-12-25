@@ -13,7 +13,7 @@
         <div class="col">
           <div class="form-floating">
           <input type="text" class="form-control" placeholder="title" v-model="title">
-          <label for="floatingInput">entry title</label>
+          <label for="floatingInput">name</label>
         </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div class="input-group fs-2">
           <span class="input-group-text">$</span>
           <input type="number" v-model="price" class="form-control" aria-label="Amount (to the nearest dollar)">
-          <button type="button" class="btn btn-success" @click="printData">submit</button>
+          <button type="button" class="btn btn-success" @click="sendData">submit</button>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@ export default {
     return {
       title: '',
       price: 5,
-      types: ['food', 'personal', 'school', 'misc'],
+      types: ['error fetching categories'],
       dataObject:{
         title: 'n/a',
         price: -1,
@@ -59,16 +59,46 @@ export default {
       }
     }
   },
+  mounted() {
+    this.fetchCategories();
+  },
   methods: {
-    sendData(){
-      this.dataObject.title = this.title
-      this.dataObject.price = this.price
-      // const jsonPayload = JSON.stringify(this.dataObject);
+    async fetchCategories() {
+      try {
+        const response = await fetch('http://localhost:8000/categories');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        this.types = data;
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
     },
-    printData(){ //for logging 
+    async sendData(){
       this.dataObject.title = this.title
       this.dataObject.price = this.price
-      console.log(this.dataObject)
+
+      try{
+        const response = await fetch('http://localhost:8000/expenses', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.dataObject)
+        })
+
+        if (!response.ok){
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+        console.log('SUCCESS')
+        console.log(responseData);
+
+      } catch(error){
+        console.error('There was a problem with the fetch operation:', error);
+      }
     },
     setType(type){
       this.dataObject.type = type

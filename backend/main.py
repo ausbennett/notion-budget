@@ -1,6 +1,8 @@
 import os
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel
 from datetime import datetime
 from dotenv import load_dotenv
@@ -11,6 +13,15 @@ notion_key = os.getenv('NOTION_KEY')
 notion_page = os.getenv('NOTION_PAGE_ID')
 
 app = FastAPI()
+
+# Add CORS middleware to the application
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Notion API endpoint
 url = 'https://api.notion.com/v1'
@@ -27,6 +38,12 @@ class Entry(BaseModel):
     date: datetime
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+@app.post("/expenses")
+async def create_item(item: Entry):
+    # Process the input data
+    return {"name": item.title, "price": item.price, "type": item.type, "date": item.date}
+
+
+@app.get("/categories")
+def read_categories():
+    return ["shopping", "food", "education", "bills", "health", "entertainment", "transport"]
