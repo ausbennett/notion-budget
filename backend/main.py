@@ -35,13 +35,14 @@ class Entry(BaseModel):
     title: str
     price: float
     type: str
+    notes: str
     date: datetime
 
 
 @app.post("/expenses")
 async def create_item(item: Entry):
     # Process the input data
-    return {"name": item.title, "price": item.price, "type": item.type, "date": item.date}
+    return {"name": item.title, "price": item.price, "type": item.type, "notes": item.notes, "date": item.date.strftime("%Y-%m-%d")}
 
 
 @app.get("/categories")
