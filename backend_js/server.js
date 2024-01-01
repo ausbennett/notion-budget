@@ -18,16 +18,29 @@ app.get('/', (req, res) => {
   res.send('Hello From Backend')
 })
 
-app.get('/categories', (req, res) => {
-  (async () => {
+app.get('/categories', async (req, res) => {
+  try {
     const databaseId = process.env.NOTION_CATEGORIES_ID;
+
+    if (!databaseId) {
+      // Handle the case where the database ID is not set
+      return res.status(500).send("Server configuration error.");
+    }
+
     const response = await notion.databases.query({
       database_id: databaseId,
     });
+
+    // You might want to format the response or handle different cases
     console.log(response);
-    res.send(response)
-  })();
+    res.send(response);
+  } catch (error) {
+    console.error(error);
+    // Send a user-friendly error message
+    res.status(500).send("An error occurred while fetching data.");
+  }
 });
+
 
 var ids = []
 app.get('/database', (req,res) => {
