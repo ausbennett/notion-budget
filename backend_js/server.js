@@ -76,6 +76,11 @@ app.post('/expense', async (req,res) => {
     'amount': {
         'number': data.price
     },
+    'category':{
+      'relation': [{
+        'id': categories[data.type]
+      }]
+    },
     'notes':{
         'rich_text': [
             {
@@ -85,8 +90,8 @@ app.post('/expense', async (req,res) => {
             }
         ]
     }
-
   }
+
   try {
     const response = await notion.pages.create({
         parent: { database_id: process.env.NOTION_DATABASE_ID },
