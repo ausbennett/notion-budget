@@ -110,7 +110,7 @@ export default {
         const responseData = await response.json();
         this.isSuccess = true
         console.log(responseData)
-        window.location.reload();
+        //window.location.reload();
 
       } catch(error){
         this.isSuccess = false

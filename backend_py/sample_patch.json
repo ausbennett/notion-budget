@@ -1,0 +1,41 @@
+{
+    "parent": {
+        "database_id": "6ee0323fa1814ced9f976bb956289f8e"
+    },
+    "properties": {
+        "name": {
+            "name": "name",
+            "type": "title",
+            "title": {
+                "text": {
+                        "content": "test"
+                    }
+            }
+        },
+        "amount": {
+            "name": "amount",
+            "type": "number",
+            "number": 123.0
+        },
+        "receipt": {
+            "name": "receipt",
+            "type": "files",
+            "files": {}
+        },
+        "date": {
+            "name": "date",
+            "type": "date",
+            "date": "2023-12-30"
+        },
+        "notes": {
+            "name": "notes",
+            "type": "rich_text",
+            "rich_text": "Hello"
+        },
+        "category": {
+            "name": "category",
+            "type": "relation",
+            "relation": [{"id": "011f5385-5269-4ec2-a67c-02157d4149c9"}]
+        }
+    }
+}
