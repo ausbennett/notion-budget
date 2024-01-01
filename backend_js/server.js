@@ -1,18 +1,16 @@
 /* eslint-disable no-undef */
 require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const port = 3000;
 
+//Declare & Init Notion API Client 
 const { Client } = require("@notionhq/client")
+const notion = new Client({ auth: process.env.NOTION_TOKEN, })
 
-// Initializing a client
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-})
-
-
-
+var categories = new Map()
+var ids = []
 
 app.get('/', (req, res) => {
   res.send('Hello From Backend')
@@ -27,22 +25,32 @@ app.get('/categories', async (req, res) => {
       return res.status(500).send("Server configuration error.");
     }
 
+    //notion api query
     const response = await notion.databases.query({
       database_id: databaseId,
     });
 
-    // You might want to format the response or handle different cases
+    if (response.hasOwnProperty('results')) {
+      response.results.forEach(item => {
+          if (item.object === 'page') {
+              const category_id = item.id;
+              const category = item.properties.Name.title[0].text.content;
+              categories[category] = category_id;
+          }
+      });
+    }
+
     console.log(response);
-    res.send(response);
+    res.send(categories.keys());
+
   } catch (error) {
     console.error(error);
-    // Send a user-friendly error message
     res.status(500).send("An error occurred while fetching data.");
   }
 });
 
 
-var ids = []
+
 app.get('/database', (req,res) => {
   (async () => {
     try {
