@@ -12,12 +12,24 @@ const notion = new Client({
 })
 
 
-var ids = []
+
 
 app.get('/', (req, res) => {
-  res.send(ids);
+  res.send('Hello From Backend')
+})
+
+app.get('/categories', (req, res) => {
+  (async () => {
+    const databaseId = process.env.NOTION_CATEGORIES_ID;
+    const response = await notion.databases.query({
+      database_id: databaseId,
+    });
+    console.log(response);
+    res.send(response)
+  })();
 });
 
+var ids = []
 app.get('/database', (req,res) => {
   (async () => {
     try {
