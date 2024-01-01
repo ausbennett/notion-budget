@@ -79,7 +79,7 @@ export default {
   methods: {
     async fetchCategories() {
       try {
-        const response = await fetch('http://localhost:8000/categories');
+        const response = await fetch('http://localhost:3000/categories');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -95,7 +95,7 @@ export default {
       this.dataObject.notes = this.notes
 
       try{
-        const response = await fetch('http://localhost:8000/expenses', {
+        const response = await fetch('http://localhost:3000/expense', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -107,10 +107,8 @@ export default {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const responseData = await response.json();
         this.isSuccess = true
-        console.log(responseData)
-        //window.location.reload();
+        console.log(response)
 
       } catch(error){
         this.isSuccess = false

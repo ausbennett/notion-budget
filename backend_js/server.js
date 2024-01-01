@@ -11,9 +11,9 @@ const { Client } = require('@notionhq/client')
 const notion = new Client({ auth: process.env.NOTION_TOKEN, })
 
 var categories = new Map()
-var ids = []
 
 app.use(cors())
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.send('Hello From Backend')
@@ -51,41 +51,56 @@ app.get('/categories', async (req, res) => {
   }
 });
 
+/*
+{
+  title: 'Hello',
+  price: 120,
+  type: 'bills',
+  notes: '',
+  date: '2024-01-01T22:30:29.796Z'
+}
+ */
 
-
-app.get('/database', (req,res) => {
-  (async () => {
-    try {
-      const response = await notion.databases.query({
-        database_id: process.env.NOTION_DATABASE_ID,
-      });
-      
-      ids = response.results.map(item => item.id)
-      console.log(ids);
-      res.send("Successfully Got ids");
-    } catch (error) {
-      console.error(error.body);
-      res.send(error);
+app.post('/expense', async (req,res) => {
+  data = req.body
+  const properties = { // 'Name' is the property name in your Notion database   
+    'name': {
+        title: [
+            {
+                text: {
+                    content: data.title
+                }
+            }
+        ]
+    },
+    'amount': {
+        'number': data.price
+    },
+    'notes':{
+        'rich_text': [
+            {
+                'text': {
+                    'content': data.notes
+                }
+            }
+        ]
     }
-  })()
+
+  }
+  try {
+    const response = await notion.pages.create({
+        parent: { database_id: process.env.NOTION_DATABASE_ID },
+        properties: properties,
+    });
+    console.log(response);
+    console.log("New entry added to the database");
+    res.sendStatus(200)
+} catch (error) {
+    console.error(error.body);
+    res.sendStatus(500)
+}
 })
 
-app.get('/ids', (req, res) => {
-  (async () => {
-    try{
-      for (const id of ids){
-        const response = await notion.pages.retrieve({
-          page_id: id
-        })
-        console.log(response);
-      }
-      res.send('Done')
-    } catch(error){
-      console.error(error.body);
-      res.send(error);
-    }
-  })()
-})
 
 
 app.listen(port, () => {
