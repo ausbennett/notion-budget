@@ -2,15 +2,18 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const port = 3000;
 
 //Declare & Init Notion API Client 
-const { Client } = require("@notionhq/client")
+const { Client } = require('@notionhq/client')
 const notion = new Client({ auth: process.env.NOTION_TOKEN, })
 
 var categories = new Map()
 var ids = []
+
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Hello From Backend')
@@ -39,10 +42,9 @@ app.get('/categories', async (req, res) => {
           }
       });
     }
-
-    console.log(response);
-    res.send(categories.keys());
-
+    console.log('Got categories:');
+    console.log(categories);
+    res.send(Object.keys(categories));
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while fetching data.");
